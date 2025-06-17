@@ -1,0 +1,29 @@
+[project]
+name = "tunnel_detector"
+version = "0.1.0"
+dependencies = [
+    "numpy",
+    "shapely",
+    "pandas",
+    "click",
+    "matplotlib",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = [
+  "algorithms*", 
+  "cli*", 
+  "geometry*", 
+  "data_io*",
+  "experiments*"
+]
+exclude = [
+  "data", "data.*",
+  "results", "results.*",
+  "tests", "tests.*"
+]
+

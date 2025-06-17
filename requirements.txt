@@ -1,0 +1,6 @@
+numpy
+shapely
+pandas
+click
+matplotlib
+pytest

@@ -1,0 +1,9 @@
+paths:
+  instances: data/instances/
+  individual_results: results/individual/
+  experiment_results: results/experiments/
+ga_default:
+  m: 50
+  G: 200
+  p: 0.1
+  g: 30

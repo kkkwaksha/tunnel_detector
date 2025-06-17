@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.egg-info/
+dist/
+build/
+
+# venv
+.venv/
+venv/
+env/
+*.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# тест-кеш
+.pytest_cache/
+.coverage
+
+data/instances/
+results/
+
+*.csv
+*.png
+
+!data/.gitkeep
+!results/.gitkeep
