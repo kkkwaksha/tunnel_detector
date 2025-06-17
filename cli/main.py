@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 import click, colorama
 
-from algorithms.partial_enum import solve as pe_solve
+from algorithms.partial_enum import PartialEnum
 from algorithms.genetic import GAParams, GeneticAlgorithm
 from data_io.io import load_instance, save_instance
 from data_io.generator import random_instance
@@ -54,7 +54,9 @@ def solve(file):
     """Розв’язати одну ІЗ двома алгоритмами й зберегти файл result."""
     tunnels = load_instance(file)
 
-    t0=time.perf_counter(); a_pe,k_pe,z_pe=pe_solve(tunnels); t_pe=(time.perf_counter()-t0)*1e3
+    pe=PartialEnum(timeout_s=5)
+    a_pe,k_pe,z_pe=pe.solve(tunnels)
+    t_pe=pe.runtime_ms
     P=GAParams(m=50,G=100,p=0.2,g=15,k_off=0.3,d_a=0.5,d_k=1.0)
     t0=time.perf_counter(); best=GeneticAlgorithm(tunnels,P).run(); t_ga=(time.perf_counter()-t0)*1e3
 
@@ -137,7 +139,9 @@ def menu():
 
         if ch=="2":              # розв'язати
             if not tunnels: print("Спершу задайте дані (1)."); continue
-            t0=time.perf_counter(); a,k,z=pe_solve(tunnels); t_pe=(time.perf_counter()-t0)*1e3
+            pe=PartialEnum(timeout_s=5)
+            a,k,z=pe.solve(tunnels)
+            t_pe=pe.runtime_ms
             P=GAParams(m=50,G=100,p=0.2,g=15,k_off=0.3,d_a=0.5,d_k=1.0)
             t0=time.perf_counter(); best=GeneticAlgorithm(tunnels,P).run(); t_ga=(time.perf_counter()-t0)*1e3
             solutions={"PE":{"a":a,"k":k,"Z":z,"T":t_pe},
