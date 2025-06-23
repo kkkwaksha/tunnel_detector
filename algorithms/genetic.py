@@ -14,13 +14,13 @@ from geometry.primitives import Rectangle, line_intersects
 
 @dataclass(slots=True)
 class GAParams:
-    m: int          # популяція
-    G: int          # макс. поколінь
-    p: float        # імовірність мутації
-    g: int          # зупинка: поколінь без покращення
-    k_off: float    # коеф. розширення інтервалу схрещування
-    d_a: float      # Δa для мутації
-    d_k: float      # Δk для мутації
+    m: int
+    G: int
+    p: float
+    g: int
+    k_off: float
+    d_a: float
+    d_k: float
     seed: int | None = None
 
 
@@ -37,16 +37,13 @@ class GeneticAlgorithm:
         self.P = params
         self.rnd = Random(self.P.seed)
 
-    # базові допоміжні функції
     def _fitness(self, a: float, k: float) -> int:
         return sum(line_intersects(r, a, k) for r in self.tunnels)
 
     def _random_line(self) -> Tuple[float, float]:
         """Початкове випадкове рішення у розумних межах."""
-        # межі беремо великі, можна покращити
         return self.rnd.uniform(-5, 5), self.rnd.uniform(-100, 100)
 
-    # оператори генетичного алгоритму
     def _tournament(self, pop: List[Tuple[float, float]]) -> Tuple[Tuple[float, float], Tuple[float, float]]:
         """Ділимо випадково навпіл, повертаємо найкращого з кожної половини."""
         self.rnd.shuffle(pop)

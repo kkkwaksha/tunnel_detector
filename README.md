@@ -6,5 +6,5 @@
 
 ## Quick start
 ```bash
-pip install -r requirements.txt      # shapely, click, pandas…
+pip install -r requirements.txt      # click, pandas…
 python -m cli.main menu              # текстове меню
